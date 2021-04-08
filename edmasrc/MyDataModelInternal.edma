@@ -1,0 +1,9 @@
+DataModel MyDataModel
+{
+    Kind Person
+    {
+        firstName+ : Name,
+        lastName+ : Name,
+        email+ : Email
+    }
+}
