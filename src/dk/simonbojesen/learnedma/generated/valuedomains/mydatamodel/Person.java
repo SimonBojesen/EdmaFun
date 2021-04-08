@@ -104,10 +104,10 @@ public abstract class Person implements Comparable<Person>
     public abstract Name lastName();
 
     /**
-     * returns the value of the field email
-     * @return  The value of the field email
+     * returns the value of the field personalMail
+     * @return  The value of the field personalMail
      */
-    public abstract Email email();
+    public abstract Email personalMail();
 
 
     /**
@@ -173,40 +173,40 @@ public abstract class Person implements Comparable<Person>
         /**
          * sets the lastName field.
          * @param lastName  The value to assign to the lastName field
-         * @return          Builder interface for setting the email field
+         * @return          Builder interface for setting the personalMail field
          */
-        public PersonBuilderEmail lastName(Name lastName);
+        public PersonBuilderPersonalMail lastName(Name lastName);
 
         /**
          * sets the lastName field.
          * @param lastName  The value to assign to the lastName field
-         * @return          Builder interface for setting the email field
+         * @return          Builder interface for setting the personalMail field
          */
-        public PersonBuilderEmail lastName(String lastName) throws InvalidValueException;
+        public PersonBuilderPersonalMail lastName(String lastName) throws InvalidValueException;
 
     }
 
 
 
     /**
-     * Builder interface for setting the email field of Person
+     * Builder interface for setting the personalMail field of Person
      */
-    public interface PersonBuilderEmail
+    public interface PersonBuilderPersonalMail
     {
 
         /**
-         * sets the email field.
-         * @param email  The value to assign to the email field
-         * @return       The created Person value
+         * sets the personalMail field.
+         * @param personalMail  The value to assign to the personalMail field
+         * @return              The created Person value
          */
-        public Person email(Email email);
+        public Person personalMail(Email personalMail);
 
         /**
-         * sets the email field.
-         * @param email  The value to assign to the email field
-         * @return       The created Person value
+         * sets the personalMail field.
+         * @param personalMail  The value to assign to the personalMail field
+         * @return              The created Person value
          */
-        public Person email(String email) throws InvalidValueException;
+        public Person personalMail(String personalMail) throws InvalidValueException;
 
     }
 

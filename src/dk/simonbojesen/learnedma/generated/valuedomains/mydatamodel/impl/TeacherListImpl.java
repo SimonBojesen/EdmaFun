@@ -1,23 +1,20 @@
 package dk.simonbojesen.learnedma.generated.valuedomains.mydatamodel.impl;
 
-import dk.simonbojesen.learnedma.generated.valuedomains.Email;
-import dk.simonbojesen.learnedma.generated.valuedomains.Name;
 import dk.simonbojesen.learnedma.generated.valuedomains.external.EDMA_ExternalConstraints;
-import dk.simonbojesen.learnedma.generated.valuedomains.impl.EmailImpl;
-import dk.simonbojesen.learnedma.generated.valuedomains.impl.NameImpl;
-import dk.simonbojesen.learnedma.generated.valuedomains.mydatamodel.Person;
-import dk.simonbojesen.learnedma.generated.valuedomains.mydatamodel.PersonID;
-import dk.simonbojesen.learnedma.generated.valuedomains.mydatamodel.impl.PersonIDImpl;
+import dk.simonbojesen.learnedma.generated.valuedomains.mydatamodel.Teacher;
+import dk.simonbojesen.learnedma.generated.valuedomains.mydatamodel.TeacherList;
 import java.io.DataOutput;
 import java.io.IOException;
+import java.lang.UnsupportedOperationException;
+import java.util.Iterator;
 import org.abstractica.edma.valuedomains.IMetaValueDomain;
 import org.abstractica.edma.valuedomains.IValueInstance;
 import org.abstractica.edma.valuedomains.exceptions.InvalidValueException;
 
 /**
- * The implementation of Person
+ * The implementation of TeacherList
  */
-public class PersonImpl extends Person implements IValueInstance
+public class TeacherListImpl extends TeacherList implements IValueInstance
 {
     private int edma_hash;
     private Object[] value;
@@ -45,9 +42,9 @@ public class PersonImpl extends Person implements IValueInstance
 
     /**
      * Constructor
-     * @param o  The Object that represents this struct value
+     * @param o  The Object that represents this list value
      */
-    public PersonImpl(Object o)
+    public TeacherListImpl(Object o)
     {
         edma_hash = 0;
         value = (Object[]) o;
@@ -80,7 +77,7 @@ public class PersonImpl extends Person implements IValueInstance
     {
         if(!(o instanceof IValueInstance)) return false;
         IValueInstance inst = (IValueInstance) o;
-        if(24 != inst.edma_getDomain().getIndex()) return false;
+        if(26 != inst.edma_getDomain().getIndex()) return false;
         return edma_domain.valueEqual(value, inst.edma_getValue());
     }
 
@@ -104,15 +101,15 @@ public class PersonImpl extends Person implements IValueInstance
     }
 
     /**
-     * Compare this Person to another Person
-     * @param person  The Person to compare with
-     * @return        A negative integer, zero, or a positive integer as this
-     *                Person is less than, equal to, or greater than the
-     *                specified Person
+     * Compare this TeacherList to another TeacherList
+     * @param teacherList  The TeacherList to compare with
+     * @return             A negative integer, zero, or a positive integer as
+     *                     this TeacherList is less than, equal to, or greater
+     *                     than the specified TeacherList
      */
-    public int compareTo(Person person)
+    public int compareTo(TeacherList teacherList)
     {
-        return edma_domain.valueCompare(value, ((PersonImpl) person).value);
+        return edma_domain.valueCompare(value, ((TeacherListImpl) teacherList).value);
     }
 
     /**
@@ -125,39 +122,76 @@ public class PersonImpl extends Person implements IValueInstance
     }
 
     /**
-     * returns the value of the field ID
-     * @return  The value of the field ID
+     * Returns an iterator for this list
+     * @return  an iterator for this list
      */
-    public PersonID ID()
+    public Iterator<Teacher> iterator()
     {
-        if(value[0] == null) return null;
-        return new PersonIDImpl(value[0]);
+        return new TeacherListIterator();
     }
 
     /**
-     * returns the value of the field firstName
-     * @return  The value of the field firstName
+     * Returns the size of this list
+     * @return  the size of this list
      */
-    public Name firstName()
+    public int size()
     {
-        return new NameImpl(value[1]);
+        return value.length;
     }
 
     /**
-     * returns the value of the field lastName
-     * @return  The value of the field lastName
+     * Returns the element on a given index in this list
+     * @param index  The index of the element to be returned
+     * @return       the element on the given index in this list
      */
-    public Name lastName()
+    public Teacher get(int index)
     {
-        return new NameImpl(value[2]);
+        return new TeacherImpl(value[index]);
     }
 
+
     /**
-     * returns the value of the field personalMail
-     * @return  The value of the field personalMail
+     * 
      */
-    public Email personalMail()
+    public class TeacherListIterator implements Iterator<Teacher>
     {
-        return new EmailImpl(value[3]);
+        private int pos;
+
+
+
+        /**
+         * Constructor
+         */
+        public TeacherListIterator()
+        {
+            pos = 0;
+        }
+
+        /**
+         * Returns true if there are more elements in this iterator
+         * @return  true if there are more elements in this iterator
+         */
+        public boolean hasNext()
+        {
+            return pos < value.length;
+        }
+
+        /**
+         * returns the next element from this iterator
+         * @return  the next element in this iterator
+         */
+        public Teacher next()
+        {
+            return new TeacherImpl(value[pos++]);
+        }
+
+        /**
+         * This operation is not supported, because the list is immutable
+         */
+        public void remove()
+        {
+            throw new UnsupportedOperationException();
+        }
     }
+
 }

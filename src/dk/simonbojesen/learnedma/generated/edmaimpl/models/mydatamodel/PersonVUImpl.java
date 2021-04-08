@@ -1,7 +1,9 @@
 package dk.simonbojesen.learnedma.generated.edmaimpl.models.mydatamodel;
 
+import dk.simonbojesen.learnedma.generated.edmaimpl.models.mydatamodel.TeacherVUImpl;
 import dk.simonbojesen.learnedma.generated.mydatamodel.kinds.person.PersonUpdater;
 import dk.simonbojesen.learnedma.generated.mydatamodel.kinds.person.PersonViewer;
+import dk.simonbojesen.learnedma.generated.mydatamodel.kinds.teacher.TeacherViewer;
 import dk.simonbojesen.learnedma.generated.valuedomains.Email;
 import dk.simonbojesen.learnedma.generated.valuedomains.Name;
 import dk.simonbojesen.learnedma.generated.valuedomains.impl.EmailImpl;
@@ -15,6 +17,7 @@ import java.util.Map;
 import org.abstractica.edma.runtime.intf.IDataModelUpdate;
 import org.abstractica.edma.runtime.intf.IDataModelView;
 import org.abstractica.edma.runtime.intf.IEntity;
+import org.abstractica.edma.runtime.intf.exceptions.UniqueException;
 import org.abstractica.edma.valuedomains.IValueInstance;
 
 /**
@@ -82,12 +85,25 @@ public class PersonVUImpl implements PersonUpdater, PersonViewer
     }
 
     /**
-     * Returns the attribute email of this Person
-     * @return  The value of the attribute email
+     * Returns the attribute personalMail of this Person
+     * @return  The value of the attribute personalMail
      */
-    public Email getEmail()
+    public Email getPersonalMail()
     {
         return new EmailImpl(edma_entity.getValue()[3]);
+    }
+
+    /**
+     * Views this Person as its extension kind Teacher. May return
+     * <tt>null</tt> if this Person is not extended to Teacher
+     * @return  The Teacher view of this Person or <tt>null</tt> if this Person
+     *          is not extended to Teacher
+     */
+    public TeacherViewer asTeacher()
+    {
+        IEntity ext = edma_dmview.kindGetFromID(1, edma_entity.getID());
+        if(ext == null) return null;
+        return new TeacherVUImpl(ext, edma_dmview);
     }
 
     /**
@@ -169,14 +185,14 @@ public class PersonVUImpl implements PersonUpdater, PersonViewer
         }
 
         /**
-         * Sets the attribute email on this Person
-         * @param email  The value to set
-         * @return       Interface for chaining attribute updates
+         * Sets the attribute personalMail on this Person
+         * @param personalMail  The value to set
+         * @return              Interface for chaining attribute updates
          */
-        public PersonAttUpd setEmail(Email email)
+        public PersonAttUpdUnique setPersonalMail(Email personalMail)
         {
-            updateMap.put(2, ((IValueInstance) email).edma_getValue());
-            return this;
+            updateMap.put(2, ((IValueInstance) personalMail).edma_getValue());
+            return new PersonAttUpdUniqueImpl(entityID, updateMap, edma_dmupdate);
         }
 
         /**
@@ -186,6 +202,75 @@ public class PersonVUImpl implements PersonUpdater, PersonViewer
         public boolean save()
         {
             return edma_dmupdate.entityUpdate(0, entityID, updateMap);
+        }
+    }
+
+
+
+    /**
+     * 
+     */
+    private class PersonAttUpdUniqueImpl implements PersonAttUpdUnique
+    {
+        private Long entityID;
+        private Map<Integer, Object> updateMap;
+        private IDataModelUpdate edma_dmupdate;
+
+
+
+        /**
+         * Constructor
+         * @param entityID       ID of the entity to update
+         * @param updateMap      Map of updates
+         * @param edma_dmupdate  Internal runtime interface
+         */
+        private PersonAttUpdUniqueImpl(Long entityID, Map<Integer, Object> updateMap, IDataModelUpdate edma_dmupdate)
+        {
+            this.entityID = entityID;
+            this.updateMap = updateMap;
+            this.edma_dmupdate = edma_dmupdate;
+        }
+
+        /**
+         * Sets the attribute firstName on this Person
+         * @param firstName  The value to set
+         * @return           Interface for chaining attribute updates
+         */
+        public PersonAttUpdUnique setFirstName(Name firstName)
+        {
+            updateMap.put(0, ((IValueInstance) firstName).edma_getValue());
+            return this;
+        }
+
+        /**
+         * Sets the attribute lastName on this Person
+         * @param lastName  The value to set
+         * @return          Interface for chaining attribute updates
+         */
+        public PersonAttUpdUnique setLastName(Name lastName)
+        {
+            updateMap.put(1, ((IValueInstance) lastName).edma_getValue());
+            return this;
+        }
+
+        /**
+         * Sets the attribute personalMail on this Person
+         * @param personalMail  The value to set
+         * @return              Interface for chaining attribute updates
+         */
+        public PersonAttUpdUnique setPersonalMail(Email personalMail)
+        {
+            updateMap.put(2, ((IValueInstance) personalMail).edma_getValue());
+            return this;
+        }
+
+        /**
+         * Saves the changes to the data model.
+         * @return  
+         */
+        public boolean save() throws UniqueException
+        {
+            return edma_dmupdate.entityUpdateUnique(0, entityID, updateMap);
         }
     }
 

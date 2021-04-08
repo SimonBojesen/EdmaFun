@@ -1,13 +1,7 @@
 package dk.simonbojesen.learnedma.generated.valuedomains.mydatamodel.impl;
 
-import dk.simonbojesen.learnedma.generated.valuedomains.Email;
-import dk.simonbojesen.learnedma.generated.valuedomains.Name;
 import dk.simonbojesen.learnedma.generated.valuedomains.external.EDMA_ExternalConstraints;
-import dk.simonbojesen.learnedma.generated.valuedomains.impl.EmailImpl;
-import dk.simonbojesen.learnedma.generated.valuedomains.impl.NameImpl;
-import dk.simonbojesen.learnedma.generated.valuedomains.mydatamodel.Person;
-import dk.simonbojesen.learnedma.generated.valuedomains.mydatamodel.PersonID;
-import dk.simonbojesen.learnedma.generated.valuedomains.mydatamodel.impl.PersonIDImpl;
+import dk.simonbojesen.learnedma.generated.valuedomains.mydatamodel.TeacherID;
 import java.io.DataOutput;
 import java.io.IOException;
 import org.abstractica.edma.valuedomains.IMetaValueDomain;
@@ -15,12 +9,11 @@ import org.abstractica.edma.valuedomains.IValueInstance;
 import org.abstractica.edma.valuedomains.exceptions.InvalidValueException;
 
 /**
- * The implementation of Person
+ * The implementation of TeacherID
  */
-public class PersonImpl extends Person implements IValueInstance
+public class TeacherIDImpl extends TeacherID implements IValueInstance
 {
-    private int edma_hash;
-    private Object[] value;
+    private Object value;
 
 
 
@@ -45,12 +38,11 @@ public class PersonImpl extends Person implements IValueInstance
 
     /**
      * Constructor
-     * @param o  The Object that represents this struct value
+     * @param value  The internal value
      */
-    public PersonImpl(Object o)
+    public TeacherIDImpl(Object value)
     {
-        edma_hash = 0;
-        value = (Object[]) o;
+        this.value = value;
     }
 
     /**
@@ -80,7 +72,7 @@ public class PersonImpl extends Person implements IValueInstance
     {
         if(!(o instanceof IValueInstance)) return false;
         IValueInstance inst = (IValueInstance) o;
-        if(24 != inst.edma_getDomain().getIndex()) return false;
+        if(25 != inst.edma_getDomain().getIndex()) return false;
         return edma_domain.valueEqual(value, inst.edma_getValue());
     }
 
@@ -90,8 +82,7 @@ public class PersonImpl extends Person implements IValueInstance
      */
     public int hashCode()
     {
-        if(edma_hash == 0) edma_hash = edma_domain.valueHashCode(value);
-        return edma_hash;
+        return value.hashCode();
     }
 
     /**
@@ -104,15 +95,15 @@ public class PersonImpl extends Person implements IValueInstance
     }
 
     /**
-     * Compare this Person to another Person
-     * @param person  The Person to compare with
-     * @return        A negative integer, zero, or a positive integer as this
-     *                Person is less than, equal to, or greater than the
-     *                specified Person
+     * Compare this TeacherID to another TeacherID
+     * @param teacherID  The TeacherID to compare with
+     * @return           A negative integer, zero, or a positive integer as
+     *                   this TeacherID is less than, equal to, or greater than
+     *                   the specified TeacherID
      */
-    public int compareTo(Person person)
+    public int compareTo(TeacherID teacherID)
     {
-        return edma_domain.valueCompare(value, ((PersonImpl) person).value);
+        return edma_domain.valueCompare(value, ((TeacherIDImpl) teacherID).value);
     }
 
     /**
@@ -125,39 +116,11 @@ public class PersonImpl extends Person implements IValueInstance
     }
 
     /**
-     * returns the value of the field ID
-     * @return  The value of the field ID
+     * returns the Long value that is stored in this TeacherID
+     * @return  The Long value stored in this TeacherID
      */
-    public PersonID ID()
+    public Long value()
     {
-        if(value[0] == null) return null;
-        return new PersonIDImpl(value[0]);
-    }
-
-    /**
-     * returns the value of the field firstName
-     * @return  The value of the field firstName
-     */
-    public Name firstName()
-    {
-        return new NameImpl(value[1]);
-    }
-
-    /**
-     * returns the value of the field lastName
-     * @return  The value of the field lastName
-     */
-    public Name lastName()
-    {
-        return new NameImpl(value[2]);
-    }
-
-    /**
-     * returns the value of the field personalMail
-     * @return  The value of the field personalMail
-     */
-    public Email personalMail()
-    {
-        return new EmailImpl(value[3]);
+        return (Long) value;
     }
 }

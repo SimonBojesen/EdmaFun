@@ -5,10 +5,10 @@ import dk.simonbojesen.learnedma.generated.valuedomains.Name;
 import dk.simonbojesen.learnedma.generated.valuedomains.impl.EmailImpl;
 import dk.simonbojesen.learnedma.generated.valuedomains.impl.NameImpl;
 import dk.simonbojesen.learnedma.generated.valuedomains.mydatamodel.Person;
-import dk.simonbojesen.learnedma.generated.valuedomains.mydatamodel.Person.PersonBuilderEmail;
 import dk.simonbojesen.learnedma.generated.valuedomains.mydatamodel.Person.PersonBuilderFirstName;
 import dk.simonbojesen.learnedma.generated.valuedomains.mydatamodel.Person.PersonBuilderID;
 import dk.simonbojesen.learnedma.generated.valuedomains.mydatamodel.Person.PersonBuilderLastName;
+import dk.simonbojesen.learnedma.generated.valuedomains.mydatamodel.Person.PersonBuilderPersonalMail;
 import dk.simonbojesen.learnedma.generated.valuedomains.mydatamodel.PersonID;
 import dk.simonbojesen.learnedma.generated.valuedomains.mydatamodel.impl.PersonIDImpl;
 import org.abstractica.edma.valuedomains.IValueInstance;
@@ -17,7 +17,7 @@ import org.abstractica.edma.valuedomains.exceptions.InvalidValueException;
 /**
  * 
  */
-public class PersonBuilderImpl implements PersonBuilderEmail, PersonBuilderFirstName, PersonBuilderID, PersonBuilderLastName
+public class PersonBuilderImpl implements PersonBuilderFirstName, PersonBuilderID, PersonBuilderLastName, PersonBuilderPersonalMail
 {
     private Object[] edma_value;
 
@@ -71,7 +71,7 @@ public class PersonBuilderImpl implements PersonBuilderEmail, PersonBuilderFirst
      */
     public PersonBuilderLastName firstName(Name firstName)
     {
-        if(firstName == null) throw new NullPointerException("The field firstName in Person may not be null");
+        if(firstName == null) throw new NullPointerException("The field firstName in the Person ValueDomain may not be null");
         edma_value[1] = ((IValueInstance) firstName).edma_getValue();
         return this;
     }
@@ -84,7 +84,7 @@ public class PersonBuilderImpl implements PersonBuilderEmail, PersonBuilderFirst
     public PersonBuilderLastName firstName(String firstName) throws InvalidValueException
     {
         if(firstName != null) NameImpl.edma_validate(firstName);
-        if(firstName == null) throw new NullPointerException();
+        if(firstName == null) throw new NullPointerException("The field firstName in the Person ValueDomain may not be null");
         edma_value[1] = NameImpl.edma_create(firstName);
         return this;
     }
@@ -92,11 +92,11 @@ public class PersonBuilderImpl implements PersonBuilderEmail, PersonBuilderFirst
     /**
      * sets the lastName field.
      * @param lastName  The value to assign to the lastName field
-     * @return          Builder interface for setting the email field
+     * @return          Builder interface for setting the personalMail field
      */
-    public PersonBuilderEmail lastName(Name lastName)
+    public PersonBuilderPersonalMail lastName(Name lastName)
     {
-        if(lastName == null) throw new NullPointerException("The field lastName in Person may not be null");
+        if(lastName == null) throw new NullPointerException("The field lastName in the Person ValueDomain may not be null");
         edma_value[2] = ((IValueInstance) lastName).edma_getValue();
         return this;
     }
@@ -104,38 +104,38 @@ public class PersonBuilderImpl implements PersonBuilderEmail, PersonBuilderFirst
     /**
      * sets the lastName field.
      * @param lastName  The value to assign to the lastName field
-     * @return          Builder interface for setting the email field
+     * @return          Builder interface for setting the personalMail field
      */
-    public PersonBuilderEmail lastName(String lastName) throws InvalidValueException
+    public PersonBuilderPersonalMail lastName(String lastName) throws InvalidValueException
     {
         if(lastName != null) NameImpl.edma_validate(lastName);
-        if(lastName == null) throw new NullPointerException();
+        if(lastName == null) throw new NullPointerException("The field lastName in the Person ValueDomain may not be null");
         edma_value[2] = NameImpl.edma_create(lastName);
         return this;
     }
 
     /**
-     * sets the email field.
-     * @param email  The value to assign to the email field
-     * @return       The created Person value
+     * sets the personalMail field.
+     * @param personalMail  The value to assign to the personalMail field
+     * @return              The created Person value
      */
-    public Person email(Email email)
+    public Person personalMail(Email personalMail)
     {
-        if(email == null) throw new NullPointerException("The field email in Person may not be null");
-        edma_value[3] = ((IValueInstance) email).edma_getValue();
+        if(personalMail == null) throw new NullPointerException("The field personalMail in the Person ValueDomain may not be null");
+        edma_value[3] = ((IValueInstance) personalMail).edma_getValue();
         return new PersonImpl(PersonImpl.edma_create(edma_value));
     }
 
     /**
-     * sets the email field.
-     * @param email  The value to assign to the email field
-     * @return       The created Person value
+     * sets the personalMail field.
+     * @param personalMail  The value to assign to the personalMail field
+     * @return              The created Person value
      */
-    public Person email(String email) throws InvalidValueException
+    public Person personalMail(String personalMail) throws InvalidValueException
     {
-        if(email != null) EmailImpl.edma_validate(email);
-        if(email == null) throw new NullPointerException();
-        edma_value[3] = EmailImpl.edma_create(email);
+        if(personalMail != null) EmailImpl.edma_validate(personalMail);
+        if(personalMail == null) throw new NullPointerException("The field personalMail in the Person ValueDomain may not be null");
+        edma_value[3] = EmailImpl.edma_create(personalMail);
         return new PersonImpl(PersonImpl.edma_create(edma_value));
     }
 }

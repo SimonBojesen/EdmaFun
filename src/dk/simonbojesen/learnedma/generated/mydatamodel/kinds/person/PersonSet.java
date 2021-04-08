@@ -1,6 +1,7 @@
 package dk.simonbojesen.learnedma.generated.mydatamodel.kinds.person;
 
 import dk.simonbojesen.learnedma.generated.mydatamodel.kinds.person.PersonViewer;
+import dk.simonbojesen.learnedma.generated.mydatamodel.kinds.teacher.TeacherSet;
 import dk.simonbojesen.learnedma.generated.valuedomains.mydatamodel.PersonID;
 import dk.simonbojesen.learnedma.generated.valuedomains.mydatamodel.PersonList;
 import java.util.Iterator;
@@ -85,6 +86,16 @@ public interface PersonSet extends Iterable<PersonViewer>
     public PersonSet filter(PersonFilter filter);
 
     /**
+     * Views this PersonSet as a set of its extension kind Teacher. May return
+     * a smaller set, since only those entries that are extended to Teacher will
+     * be included in the result set.
+     * @return  The Teacher view of the entries in this set. May return a
+     *          smaller set, since only those entries that are extended to
+     *          Teacher will be included in the result set.
+     */
+    public TeacherSet asTeacherSet();
+
+    /**
      * Returns a new set with the same entries but ordered by ID.
      * @return  A new set with the same entries but ordered by ID.
      */
@@ -157,28 +168,32 @@ public interface PersonSet extends Iterable<PersonViewer>
     public PersonSet subOrderByLastNameDesc();
 
     /**
-     * Returns a new set with the same entries but ordered by email
-     * @return  A new set with the same entries but ordered by email
+     * Returns a new set with the same entries but ordered by personalMail
+     * @return  A new set with the same entries but ordered by personalMail
      */
-    public PersonSet orderByEmail();
+    public PersonSet orderByPersonalMail();
 
     /**
-     * Returns a new set with the same entries but ordered by email
-     * @return  A new set with the same entries but ordered by email
+     * Returns a new set with the same entries but ordered by personalMail
+     * @return  A new set with the same entries but ordered by personalMail
      */
-    public PersonSet orderByEmailDesc();
+    public PersonSet orderByPersonalMailDesc();
 
     /**
-     * Returns a new set with the same entries that is sub ordered by email
-     * @return  A new set with the same entries that is sub ordered by email
+     * Returns a new set with the same entries that is sub ordered by
+     * personalMail
+     * @return  A new set with the same entries that is sub ordered by
+     *          personalMail
      */
-    public PersonSet subOrderByEmail();
+    public PersonSet subOrderByPersonalMail();
 
     /**
-     * Returns a new set with the same entries that is sub ordered by email
-     * @return  A new set with the same entries that is sub ordered by email
+     * Returns a new set with the same entries that is sub ordered by
+     * personalMail
+     * @return  A new set with the same entries that is sub ordered by
+     *          personalMail
      */
-    public PersonSet subOrderByEmailDesc();
+    public PersonSet subOrderByPersonalMailDesc();
 
     /**
      * Returns an iterator for this set

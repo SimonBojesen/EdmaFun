@@ -4,6 +4,21 @@ DataModel MyDataModel
     {
         firstName+ : Name,
         lastName+ : Name,
-        email+ : Email
+        personalMail+ : Email,
+        Unique(personalMail)
     }
+
+    Kind Teacher extends Person
+    {
+        schoolMail+ : Email,
+        Unique(schoolMail)
+    }
+
+    Kind Course
+    {
+        name+ : Name,
+        Unique(name)
+    }
+
+    
 }

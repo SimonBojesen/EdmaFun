@@ -39,7 +39,7 @@ public class PersonBuilderImpl implements PersonBuilderEmail, PersonBuilderFirst
      */
     public PersonBuilderMiddleName firstName(Name firstName)
     {
-        if(firstName == null) throw new NullPointerException("The field firstName in Person may not be null");
+        if(firstName == null) throw new NullPointerException("The field firstName in the Person ValueDomain may not be null");
         edma_value[0] = ((IValueInstance) firstName).edma_getValue();
         return this;
     }
@@ -52,7 +52,7 @@ public class PersonBuilderImpl implements PersonBuilderEmail, PersonBuilderFirst
     public PersonBuilderMiddleName firstName(String firstName) throws InvalidValueException
     {
         if(firstName != null) NameImpl.edma_validate(firstName);
-        if(firstName == null) throw new NullPointerException();
+        if(firstName == null) throw new NullPointerException("The field firstName in the Person ValueDomain may not be null");
         edma_value[0] = NameImpl.edma_create(firstName);
         return this;
     }
@@ -97,7 +97,7 @@ public class PersonBuilderImpl implements PersonBuilderEmail, PersonBuilderFirst
      */
     public PersonBuilderEmail lastName(Name lastName)
     {
-        if(lastName == null) throw new NullPointerException("The field lastName in Person may not be null");
+        if(lastName == null) throw new NullPointerException("The field lastName in the Person ValueDomain may not be null");
         edma_value[2] = ((IValueInstance) lastName).edma_getValue();
         return this;
     }
@@ -110,7 +110,7 @@ public class PersonBuilderImpl implements PersonBuilderEmail, PersonBuilderFirst
     public PersonBuilderEmail lastName(String lastName) throws InvalidValueException
     {
         if(lastName != null) NameImpl.edma_validate(lastName);
-        if(lastName == null) throw new NullPointerException();
+        if(lastName == null) throw new NullPointerException("The field lastName in the Person ValueDomain may not be null");
         edma_value[2] = NameImpl.edma_create(lastName);
         return this;
     }
@@ -122,7 +122,7 @@ public class PersonBuilderImpl implements PersonBuilderEmail, PersonBuilderFirst
      */
     public PersonBuilderPhoneNumber email(Email email)
     {
-        if(email == null) throw new NullPointerException("The field email in Person may not be null");
+        if(email == null) throw new NullPointerException("The field email in the Person ValueDomain may not be null");
         edma_value[3] = ((IValueInstance) email).edma_getValue();
         return this;
     }
@@ -135,7 +135,7 @@ public class PersonBuilderImpl implements PersonBuilderEmail, PersonBuilderFirst
     public PersonBuilderPhoneNumber email(String email) throws InvalidValueException
     {
         if(email != null) EmailImpl.edma_validate(email);
-        if(email == null) throw new NullPointerException();
+        if(email == null) throw new NullPointerException("The field email in the Person ValueDomain may not be null");
         edma_value[3] = EmailImpl.edma_create(email);
         return this;
     }
@@ -147,7 +147,7 @@ public class PersonBuilderImpl implements PersonBuilderEmail, PersonBuilderFirst
      */
     public Person phoneNumber(Mobile phoneNumber)
     {
-        if(phoneNumber == null) throw new NullPointerException("The field phoneNumber in Person may not be null");
+        if(phoneNumber == null) throw new NullPointerException("The field phoneNumber in the Person ValueDomain may not be null");
         edma_value[4] = ((IValueInstance) phoneNumber).edma_getValue();
         return new PersonImpl(PersonImpl.edma_create(edma_value));
     }
@@ -160,7 +160,7 @@ public class PersonBuilderImpl implements PersonBuilderEmail, PersonBuilderFirst
     public Person phoneNumber(String phoneNumber) throws InvalidValueException
     {
         if(phoneNumber != null) MobileImpl.edma_validate(phoneNumber);
-        if(phoneNumber == null) throw new NullPointerException();
+        if(phoneNumber == null) throw new NullPointerException("The field phoneNumber in the Person ValueDomain may not be null");
         edma_value[4] = MobileImpl.edma_create(phoneNumber);
         return new PersonImpl(PersonImpl.edma_create(edma_value));
     }

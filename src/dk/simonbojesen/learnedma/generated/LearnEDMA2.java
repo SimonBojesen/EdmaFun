@@ -4,9 +4,11 @@ import dk.simonbojesen.learnedma.generated.edmaimpl.models.mydatamodel.MyDataMod
 import java.util.ArrayList;
 import java.util.Collection;
 import org.abstractica.edma.metamodel.IMetaEnvironment;
+import org.abstractica.edma.metamodel.IMetaIndex.IndexType;
 import org.abstractica.edma.metamodel.impl.MetaAttribute;
 import org.abstractica.edma.metamodel.impl.MetaDataModel;
 import org.abstractica.edma.metamodel.impl.MetaEnvironment;
+import org.abstractica.edma.metamodel.impl.MetaIndex;
 import org.abstractica.edma.metamodel.impl.MetaKind;
 import org.abstractica.edma.metamodel.impl.ValueDomainBuilder;
 import org.abstractica.edma.metamodel.impl.ValueDomainBuilder.Field;
@@ -196,9 +198,41 @@ public class LearnEDMA2
             {
                 new MetaAttribute(person, "firstName", "Name", false, true, null);
                 new MetaAttribute(person, "lastName", "Name", false, true, null);
-                new MetaAttribute(person, "email", "Email", false, true, null);
+                new MetaAttribute(person, "personalMail", "Email", false, true, null);
+                //Index:  Unique (personalMail)
+                {
+                    MetaIndex edma_index = new MetaIndex(IndexType.Unique);
+                    edma_index.addAttribute(person.getAttribute(2));
+                    person.addIndex(edma_index);
+                }
             }
             edma_model.addKind(person);
+        
+            // Kind : Teacher
+            MetaKind teacher = new MetaKind("Teacher", null, person);
+            {
+                new MetaAttribute(teacher, "schoolMail", "Email", false, true, null);
+                //Index:  Unique (schoolMail)
+                {
+                    MetaIndex edma_index = new MetaIndex(IndexType.Unique);
+                    edma_index.addAttribute(teacher.getAttribute(0));
+                    teacher.addIndex(edma_index);
+                }
+            }
+            edma_model.addKind(teacher);
+        
+            // Kind : Course
+            MetaKind course = new MetaKind("Course", null, null);
+            {
+                new MetaAttribute(course, "name", "Name", false, true, null);
+                //Index:  Unique (name)
+                {
+                    MetaIndex edma_index = new MetaIndex(IndexType.Unique);
+                    edma_index.addAttribute(course.getAttribute(0));
+                    course.addIndex(edma_index);
+                }
+            }
+            edma_model.addKind(course);
             edma_environment.addMetaDataModel(edma_model);
         }
         vdb.buildWithEnvironment(edma_environment);

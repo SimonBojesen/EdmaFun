@@ -5,9 +5,11 @@ import dk.simonbojesen.learnedma.generated.edmaimpl.models.mydatamodel.PersonVUI
 import dk.simonbojesen.learnedma.generated.mydatamodel.kinds.person.PersonKind;
 import dk.simonbojesen.learnedma.generated.mydatamodel.kinds.person.PersonSet;
 import dk.simonbojesen.learnedma.generated.mydatamodel.kinds.person.PersonViewer;
+import dk.simonbojesen.learnedma.generated.valuedomains.Email;
 import dk.simonbojesen.learnedma.generated.valuedomains.mydatamodel.PersonID;
 import org.abstractica.edma.runtime.intf.IDataModelView;
 import org.abstractica.edma.runtime.intf.IEntity;
+import org.abstractica.edma.valuedomains.IValueInstance;
 
 /**
  * 
@@ -44,6 +46,16 @@ public class PersonKindImpl implements PersonKind
     }
 
     /**
+     * Returns an empty set of Person entities.
+     * @return  An empty set of Person entities.
+     */
+    public PersonSet getEmptyPersonSet()
+    {
+        int newSetID = edma_dmview.kindGetEmptySet(0);
+        return new PersonSetImpl(newSetID, edma_dmview);
+    }
+
+    /**
      * Returns the set of all Person entities.
      * @return  The set of all Person entities.
      */
@@ -51,5 +63,22 @@ public class PersonKindImpl implements PersonKind
     {
         int newSetID = edma_dmview.kindGetAll(0);
         return new PersonSetImpl(newSetID, edma_dmview);
+    }
+
+    /**
+     * Returns the unique person from the unique-index on personalMail or
+     * <tt>null</tt> if there is no person with the given personalMail.
+     * @param personalMail  Value for personalMail
+     * @return              The unique person from the unique-index on
+     *                      personalMail or <tt>null</tt> if there is no person
+     *                      with the given personalMail.
+     */
+    public PersonViewer getFromPersonalMail(Email personalMail)
+    {
+        Object[] edma_values = new Object[1];
+        edma_values[0] = ((IValueInstance) personalMail).edma_getValue();
+        IEntity res = edma_dmview.getKindIndex(0, 0).getFromUnique(edma_values);
+        if(res == null) return null;
+        return new PersonVUImpl(res, edma_dmview);
     }
 }

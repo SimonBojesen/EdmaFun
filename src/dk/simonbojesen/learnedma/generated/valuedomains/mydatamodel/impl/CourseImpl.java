@@ -1,13 +1,11 @@
 package dk.simonbojesen.learnedma.generated.valuedomains.mydatamodel.impl;
 
-import dk.simonbojesen.learnedma.generated.valuedomains.Email;
 import dk.simonbojesen.learnedma.generated.valuedomains.Name;
 import dk.simonbojesen.learnedma.generated.valuedomains.external.EDMA_ExternalConstraints;
-import dk.simonbojesen.learnedma.generated.valuedomains.impl.EmailImpl;
 import dk.simonbojesen.learnedma.generated.valuedomains.impl.NameImpl;
-import dk.simonbojesen.learnedma.generated.valuedomains.mydatamodel.Person;
-import dk.simonbojesen.learnedma.generated.valuedomains.mydatamodel.PersonID;
-import dk.simonbojesen.learnedma.generated.valuedomains.mydatamodel.impl.PersonIDImpl;
+import dk.simonbojesen.learnedma.generated.valuedomains.mydatamodel.Course;
+import dk.simonbojesen.learnedma.generated.valuedomains.mydatamodel.CourseID;
+import dk.simonbojesen.learnedma.generated.valuedomains.mydatamodel.impl.CourseIDImpl;
 import java.io.DataOutput;
 import java.io.IOException;
 import org.abstractica.edma.valuedomains.IMetaValueDomain;
@@ -15,9 +13,9 @@ import org.abstractica.edma.valuedomains.IValueInstance;
 import org.abstractica.edma.valuedomains.exceptions.InvalidValueException;
 
 /**
- * The implementation of Person
+ * The implementation of Course
  */
-public class PersonImpl extends Person implements IValueInstance
+public class CourseImpl extends Course implements IValueInstance
 {
     private int edma_hash;
     private Object[] value;
@@ -47,7 +45,7 @@ public class PersonImpl extends Person implements IValueInstance
      * Constructor
      * @param o  The Object that represents this struct value
      */
-    public PersonImpl(Object o)
+    public CourseImpl(Object o)
     {
         edma_hash = 0;
         value = (Object[]) o;
@@ -80,7 +78,7 @@ public class PersonImpl extends Person implements IValueInstance
     {
         if(!(o instanceof IValueInstance)) return false;
         IValueInstance inst = (IValueInstance) o;
-        if(24 != inst.edma_getDomain().getIndex()) return false;
+        if(30 != inst.edma_getDomain().getIndex()) return false;
         return edma_domain.valueEqual(value, inst.edma_getValue());
     }
 
@@ -104,15 +102,15 @@ public class PersonImpl extends Person implements IValueInstance
     }
 
     /**
-     * Compare this Person to another Person
-     * @param person  The Person to compare with
+     * Compare this Course to another Course
+     * @param course  The Course to compare with
      * @return        A negative integer, zero, or a positive integer as this
-     *                Person is less than, equal to, or greater than the
-     *                specified Person
+     *                Course is less than, equal to, or greater than the
+     *                specified Course
      */
-    public int compareTo(Person person)
+    public int compareTo(Course course)
     {
-        return edma_domain.valueCompare(value, ((PersonImpl) person).value);
+        return edma_domain.valueCompare(value, ((CourseImpl) course).value);
     }
 
     /**
@@ -128,36 +126,18 @@ public class PersonImpl extends Person implements IValueInstance
      * returns the value of the field ID
      * @return  The value of the field ID
      */
-    public PersonID ID()
+    public CourseID ID()
     {
         if(value[0] == null) return null;
-        return new PersonIDImpl(value[0]);
+        return new CourseIDImpl(value[0]);
     }
 
     /**
-     * returns the value of the field firstName
-     * @return  The value of the field firstName
+     * returns the value of the field name
+     * @return  The value of the field name
      */
-    public Name firstName()
+    public Name name()
     {
         return new NameImpl(value[1]);
-    }
-
-    /**
-     * returns the value of the field lastName
-     * @return  The value of the field lastName
-     */
-    public Name lastName()
-    {
-        return new NameImpl(value[2]);
-    }
-
-    /**
-     * returns the value of the field personalMail
-     * @return  The value of the field personalMail
-     */
-    public Email personalMail()
-    {
-        return new EmailImpl(value[3]);
     }
 }

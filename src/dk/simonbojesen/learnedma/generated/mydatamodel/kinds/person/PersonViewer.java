@@ -1,5 +1,6 @@
 package dk.simonbojesen.learnedma.generated.mydatamodel.kinds.person;
 
+import dk.simonbojesen.learnedma.generated.mydatamodel.kinds.teacher.TeacherViewer;
 import dk.simonbojesen.learnedma.generated.valuedomains.Email;
 import dk.simonbojesen.learnedma.generated.valuedomains.Name;
 import dk.simonbojesen.learnedma.generated.valuedomains.mydatamodel.Person;
@@ -37,10 +38,18 @@ public interface PersonViewer
     public Name getLastName();
 
     /**
-     * Returns the attribute email of this Person
-     * @return  The value of the attribute email
+     * Returns the attribute personalMail of this Person
+     * @return  The value of the attribute personalMail
      */
-    public Email getEmail();
+    public Email getPersonalMail();
+
+    /**
+     * Views this Person as its extension kind Teacher. May return
+     * <tt>null</tt> if this Person is not extended to Teacher
+     * @return  The Teacher view of this Person or <tt>null</tt> if this Person
+     *          is not extended to Teacher
+     */
+    public TeacherViewer asTeacher();
 
     /**
      * Returns <tt>true</tt> if this entity has the same ID as the provided

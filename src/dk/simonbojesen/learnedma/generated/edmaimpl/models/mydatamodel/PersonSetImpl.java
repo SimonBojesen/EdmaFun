@@ -1,8 +1,10 @@
 package dk.simonbojesen.learnedma.generated.edmaimpl.models.mydatamodel;
 
+import dk.simonbojesen.learnedma.generated.edmaimpl.models.mydatamodel.TeacherSetImpl;
 import dk.simonbojesen.learnedma.generated.mydatamodel.kinds.person.PersonFilter;
 import dk.simonbojesen.learnedma.generated.mydatamodel.kinds.person.PersonSet;
 import dk.simonbojesen.learnedma.generated.mydatamodel.kinds.person.PersonViewer;
+import dk.simonbojesen.learnedma.generated.mydatamodel.kinds.teacher.TeacherSet;
 import dk.simonbojesen.learnedma.generated.valuedomains.mydatamodel.PersonID;
 import dk.simonbojesen.learnedma.generated.valuedomains.mydatamodel.PersonList;
 import dk.simonbojesen.learnedma.generated.valuedomains.mydatamodel.impl.PersonListImpl;
@@ -162,6 +164,20 @@ public class PersonSetImpl implements PersonSet
     }
 
     /**
+     * Views this PersonSet as a set of its extension kind Teacher. May return
+     * a smaller set, since only those entries that are extended to Teacher will
+     * be included in the result set.
+     * @return  The Teacher view of the entries in this set. May return a
+     *          smaller set, since only those entries that are extended to
+     *          Teacher will be included in the result set.
+     */
+    public TeacherSet asTeacherSet()
+    {
+        int newSetID = edma_dmview.setExtensionDown(setID, 1);
+        return new TeacherSetImpl(newSetID, edma_dmview);
+    }
+
+    /**
      * Returns a new set with the same entries but ordered by ID.
      * @return  A new set with the same entries but ordered by ID.
      */
@@ -282,40 +298,44 @@ public class PersonSetImpl implements PersonSet
     }
 
     /**
-     * Returns a new set with the same entries but ordered by email
-     * @return  A new set with the same entries but ordered by email
+     * Returns a new set with the same entries but ordered by personalMail
+     * @return  A new set with the same entries but ordered by personalMail
      */
-    public PersonSet orderByEmail()
+    public PersonSet orderByPersonalMail()
     {
         int newSetID = edma_dmview.setOrderBy(setID, 2, false);
         return new PersonSetImpl(newSetID, edma_dmview);
     }
 
     /**
-     * Returns a new set with the same entries but ordered by email
-     * @return  A new set with the same entries but ordered by email
+     * Returns a new set with the same entries but ordered by personalMail
+     * @return  A new set with the same entries but ordered by personalMail
      */
-    public PersonSet orderByEmailDesc()
+    public PersonSet orderByPersonalMailDesc()
     {
         int newSetID = edma_dmview.setOrderBy(setID, 2, true);
         return new PersonSetImpl(newSetID, edma_dmview);
     }
 
     /**
-     * Returns a new set with the same entries that is sub ordered by email
-     * @return  A new set with the same entries that is sub ordered by email
+     * Returns a new set with the same entries that is sub ordered by
+     * personalMail
+     * @return  A new set with the same entries that is sub ordered by
+     *          personalMail
      */
-    public PersonSet subOrderByEmail()
+    public PersonSet subOrderByPersonalMail()
     {
         int newSetID = edma_dmview.setSubOrderBy(setID, 2, false);
         return new PersonSetImpl(newSetID, edma_dmview);
     }
 
     /**
-     * Returns a new set with the same entries that is sub ordered by email
-     * @return  A new set with the same entries that is sub ordered by email
+     * Returns a new set with the same entries that is sub ordered by
+     * personalMail
+     * @return  A new set with the same entries that is sub ordered by
+     *          personalMail
      */
-    public PersonSet subOrderByEmailDesc()
+    public PersonSet subOrderByPersonalMailDesc()
     {
         int newSetID = edma_dmview.setSubOrderBy(setID, 2, true);
         return new PersonSetImpl(newSetID, edma_dmview);
