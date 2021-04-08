@@ -16,9 +16,11 @@ DataModel MyDataModel
 
     Kind Course
     {
-        name+ : Name,
+        name : Name,
         Unique(name)
     }
 
-    
+    Relation CourseEnrollment Course >-< Person:student
+
+    Relation TeacherAssignment Course >-- Teacher
 }

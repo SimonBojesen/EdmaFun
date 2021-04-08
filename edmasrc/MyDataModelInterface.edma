@@ -1,0 +1,41 @@
+DataModel MyDataModel
+{
+    Action createPerson
+    {
+        Description:
+            "Creates a new Person"
+        Input:
+            firstName : Name,
+            lastName : Name,
+            personalMail : Email
+        Output:
+            id : PersonID
+        ErrorCodes:
+            1 - "Email already exists"
+    }
+
+    Action createTeacher
+        {
+            Description:
+                "Creates a new Teacher"
+            Input:
+                personID : PersonID,
+                schoolMail : Email
+            Output:
+                id : TeacherID
+            ErrorCodes:
+                1 - "Email already exists"
+        }
+
+    Action createCourse
+            {
+                Description:
+                    "Creates a new Course"
+                Input:
+                    courseName : Name
+                Output:
+                    id : CourseID
+                ErrorCodes:
+                    1 - "Course already exists"
+            }
+}

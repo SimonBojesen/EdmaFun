@@ -5,11 +5,14 @@ import java.util.ArrayList;
 import java.util.Collection;
 import org.abstractica.edma.metamodel.IMetaEnvironment;
 import org.abstractica.edma.metamodel.IMetaIndex.IndexType;
+import org.abstractica.edma.metamodel.IMetaRelation.RelationType;
 import org.abstractica.edma.metamodel.impl.MetaAttribute;
 import org.abstractica.edma.metamodel.impl.MetaDataModel;
 import org.abstractica.edma.metamodel.impl.MetaEnvironment;
 import org.abstractica.edma.metamodel.impl.MetaIndex;
 import org.abstractica.edma.metamodel.impl.MetaKind;
+import org.abstractica.edma.metamodel.impl.MetaMethod;
+import org.abstractica.edma.metamodel.impl.MetaRelation;
 import org.abstractica.edma.metamodel.impl.ValueDomainBuilder;
 import org.abstractica.edma.metamodel.impl.ValueDomainBuilder.Field;
 import org.abstractica.edma.runtime.implementations.mem.modelstore.speed.newindex.IndexUtil;
@@ -233,6 +236,39 @@ public class LearnEDMA2
                 }
             }
             edma_model.addKind(course);
+        
+            //Relations:
+            {
+                MetaRelation mr = new MetaRelation("CourseEnrollment", course, "course", person, "student", RelationType.ManyToMany);
+                edma_model.addRelation(mr);
+            }
+            {
+                MetaRelation mr = new MetaRelation("TeacherAssignment", course, "course", teacher, "teacher", RelationType.ManyToOne);
+                edma_model.addRelation(mr);
+            }
+        
+            //Actions:
+            {
+                MetaMethod action = new MetaMethod("createPerson", "Creates a new Person");
+                action.addInputParameter("firstName", "Name", false);
+                action.addInputParameter("lastName", "Name", false);
+                action.addInputParameter("personalMail", "Email", false);
+                action.addOutputParameter("id", "PersonID", false);
+                edma_model.addAction(action);
+            }
+            {
+                MetaMethod action = new MetaMethod("createTeacher", "Creates a new Teacher");
+                action.addInputParameter("personID", "PersonID", false);
+                action.addInputParameter("schoolMail", "Email", false);
+                action.addOutputParameter("id", "TeacherID", false);
+                edma_model.addAction(action);
+            }
+            {
+                MetaMethod action = new MetaMethod("createCourse", "Creates a new Course");
+                action.addInputParameter("courseName", "Name", false);
+                action.addOutputParameter("id", "CourseID", false);
+                edma_model.addAction(action);
+            }
             edma_environment.addMetaDataModel(edma_model);
         }
         vdb.buildWithEnvironment(edma_environment);

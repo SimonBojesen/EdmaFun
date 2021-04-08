@@ -1,8 +1,12 @@
 package dk.simonbojesen.learnedma.generated.edmaimpl.models.mydatamodel;
 
+import dk.simonbojesen.learnedma.generated.edmaimpl.models.mydatamodel.PersonSetImpl;
+import dk.simonbojesen.learnedma.generated.edmaimpl.models.mydatamodel.TeacherSetImpl;
 import dk.simonbojesen.learnedma.generated.mydatamodel.kinds.course.CourseFilter;
 import dk.simonbojesen.learnedma.generated.mydatamodel.kinds.course.CourseSet;
 import dk.simonbojesen.learnedma.generated.mydatamodel.kinds.course.CourseViewer;
+import dk.simonbojesen.learnedma.generated.mydatamodel.kinds.person.PersonSet;
+import dk.simonbojesen.learnedma.generated.mydatamodel.kinds.teacher.TeacherSet;
 import dk.simonbojesen.learnedma.generated.valuedomains.mydatamodel.CourseID;
 import dk.simonbojesen.learnedma.generated.valuedomains.mydatamodel.CourseList;
 import dk.simonbojesen.learnedma.generated.valuedomains.mydatamodel.impl.CourseListImpl;
@@ -237,6 +241,26 @@ public class CourseSetImpl implements CourseSet
     {
         int newSetID = edma_dmview.setSubOrderBy(setID, 0, true);
         return new CourseSetImpl(newSetID, edma_dmview);
+    }
+
+    /**
+     * This methods follows the relation CourseEnrollment
+     * @return  The result of following the relation CourseEnrollment
+     */
+    public PersonSet asCourseSetGetStudentSet()
+    {
+        int newSetID = edma_dmview.relationAsASetGetBSet(0, setID);
+        return new PersonSetImpl(newSetID, edma_dmview);
+    }
+
+    /**
+     * This methods follows the relation TeacherAssignment
+     * @return  The result of following the relation TeacherAssignment
+     */
+    public TeacherSet asCourseSetGetTeacherSet()
+    {
+        int newSetID = edma_dmview.relationAsASetGetBSet(1, setID);
+        return new TeacherSetImpl(newSetID, edma_dmview);
     }
 
     /**

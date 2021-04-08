@@ -1,6 +1,14 @@
 package dk.simonbojesen.learnedma.generated.mydatamodel.remote;
 
 import dk.simonbojesen.learnedma.generated.mydatamodel.MyDataModel;
+import dk.simonbojesen.learnedma.generated.mydatamodel.actions.CreateCourseResult;
+import dk.simonbojesen.learnedma.generated.mydatamodel.actions.CreatePersonResult;
+import dk.simonbojesen.learnedma.generated.mydatamodel.actions.CreateTeacherResult;
+import dk.simonbojesen.learnedma.generated.valuedomains.Email;
+import dk.simonbojesen.learnedma.generated.valuedomains.Name;
+import dk.simonbojesen.learnedma.generated.valuedomains.mydatamodel.CourseID;
+import dk.simonbojesen.learnedma.generated.valuedomains.mydatamodel.PersonID;
+import dk.simonbojesen.learnedma.generated.valuedomains.mydatamodel.TeacherID;
 import java.io.DataInput;
 import java.io.DataOutput;
 import java.io.IOException;
@@ -34,6 +42,69 @@ public class MyDataModelServerInstance implements IServerInstance
     {
         switch(methodID)
         {
+            case 0:
+            {
+                Name in_firstName = Name.fromStreamNoValidate(edma_in);
+                Name in_lastName = Name.fromStreamNoValidate(edma_in);
+                Email in_personalMail = Email.fromStreamNoValidate(edma_in);
+                CreatePersonResult edma_res = edma_inst.createPerson(in_firstName, in_lastName, in_personalMail);
+                edma_out.writeBoolean(true);
+                edma_out.writeInt(edma_res.errorCode());
+                edma_out.writeUTF(edma_res.errorMessage());
+                if(edma_res.errorDescription() != null)
+                {
+                    edma_out.writeBoolean(true);
+                    edma_out.writeUTF(edma_res.errorDescription());
+                }
+                else
+                {
+                    edma_out.writeBoolean(false);
+                }
+                PersonID out_id = edma_res.getId();
+                out_id.toStream(edma_out);
+                break;
+            }
+            case 1:
+            {
+                PersonID in_personID = PersonID.fromStreamNoValidate(edma_in);
+                Email in_schoolMail = Email.fromStreamNoValidate(edma_in);
+                CreateTeacherResult edma_res = edma_inst.createTeacher(in_personID, in_schoolMail);
+                edma_out.writeBoolean(true);
+                edma_out.writeInt(edma_res.errorCode());
+                edma_out.writeUTF(edma_res.errorMessage());
+                if(edma_res.errorDescription() != null)
+                {
+                    edma_out.writeBoolean(true);
+                    edma_out.writeUTF(edma_res.errorDescription());
+                }
+                else
+                {
+                    edma_out.writeBoolean(false);
+                }
+                TeacherID out_id = edma_res.getId();
+                out_id.toStream(edma_out);
+                break;
+            }
+            case 2:
+            {
+                Name in_courseName = Name.fromStreamNoValidate(edma_in);
+                CreateCourseResult edma_res = edma_inst.createCourse(in_courseName);
+                edma_out.writeBoolean(true);
+                edma_out.writeInt(edma_res.errorCode());
+                edma_out.writeUTF(edma_res.errorMessage());
+                if(edma_res.errorDescription() != null)
+                {
+                    edma_out.writeBoolean(true);
+                    edma_out.writeUTF(edma_res.errorDescription());
+                }
+                else
+                {
+                    edma_out.writeBoolean(false);
+                }
+                CourseID out_id = edma_res.getId();
+                out_id.toStream(edma_out);
+                break;
+            }
             default:
                 throw new RuntimeException("Invalid method ID: " + methodID);
         }

@@ -1,6 +1,8 @@
 package dk.simonbojesen.learnedma.generated.edmaimpl.models.mydatamodel;
 
+import dk.simonbojesen.learnedma.generated.edmaimpl.models.mydatamodel.CourseSetImpl;
 import dk.simonbojesen.learnedma.generated.edmaimpl.models.mydatamodel.TeacherVUImpl;
+import dk.simonbojesen.learnedma.generated.mydatamodel.kinds.course.CourseSet;
 import dk.simonbojesen.learnedma.generated.mydatamodel.kinds.person.PersonUpdater;
 import dk.simonbojesen.learnedma.generated.mydatamodel.kinds.person.PersonViewer;
 import dk.simonbojesen.learnedma.generated.mydatamodel.kinds.teacher.TeacherViewer;
@@ -104,6 +106,16 @@ public class PersonVUImpl implements PersonUpdater, PersonViewer
         IEntity ext = edma_dmview.kindGetFromID(1, edma_entity.getID());
         if(ext == null) return null;
         return new TeacherVUImpl(ext, edma_dmview);
+    }
+
+    /**
+     * This methods follows the relation CourseEnrollment
+     * @return  The result of following the relation CourseEnrollment
+     */
+    public CourseSet asStudentGetCourseSet()
+    {
+        int setID = edma_dmview.relationAsBGetASet(0, edma_entity.getID());
+        return new CourseSetImpl(setID, edma_dmview);
     }
 
     /**

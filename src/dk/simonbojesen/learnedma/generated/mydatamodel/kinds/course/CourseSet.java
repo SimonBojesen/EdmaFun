@@ -1,6 +1,8 @@
 package dk.simonbojesen.learnedma.generated.mydatamodel.kinds.course;
 
 import dk.simonbojesen.learnedma.generated.mydatamodel.kinds.course.CourseViewer;
+import dk.simonbojesen.learnedma.generated.mydatamodel.kinds.person.PersonSet;
+import dk.simonbojesen.learnedma.generated.mydatamodel.kinds.teacher.TeacherSet;
 import dk.simonbojesen.learnedma.generated.valuedomains.mydatamodel.CourseID;
 import dk.simonbojesen.learnedma.generated.valuedomains.mydatamodel.CourseList;
 import java.util.Iterator;
@@ -131,6 +133,18 @@ public interface CourseSet extends Iterable<CourseViewer>
      * @return  A new set with the same entries that is sub ordered by name
      */
     public CourseSet subOrderByNameDesc();
+
+    /**
+     * This methods follows the relation CourseEnrollment
+     * @return  The result of following the relation CourseEnrollment
+     */
+    public PersonSet asCourseSetGetStudentSet();
+
+    /**
+     * This methods follows the relation TeacherAssignment
+     * @return  The result of following the relation TeacherAssignment
+     */
+    public TeacherSet asCourseSetGetTeacherSet();
 
     /**
      * Returns an iterator for this set

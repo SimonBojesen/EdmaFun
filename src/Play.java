@@ -1,27 +1,33 @@
-import dk.simonbojesen.learnedma.generated.valuedomains.Animal;
-import dk.simonbojesen.learnedma.generated.valuedomains.Person;
-import dk.simonbojesen.learnedma.generated.valuedomains.WetsuitSizeList;
+import dk.simonbojesen.learnedma.generated.LearnEDMA2;
+import dk.simonbojesen.learnedma.generated.mydatamodel.MyDataModel;
+import dk.simonbojesen.learnedma.generated.mydatamodel.MyDataModelFactory;
+import dk.simonbojesen.learnedma.generated.mydatamodel.MyDataModelInstance;
+import dk.simonbojesen.learnedma.generated.mydatamodel.test.MyDataModelTest;
+import org.abstractica.edma.runtime.implementations.common.collectionfactory.java.JavaCollectionFactory;
+import org.abstractica.edma.runtime.implementations.mem.RuntimeFactory;
 import org.abstractica.edma.valuedomains.userinput.SimpleTerminal;
 
+import java.io.IOException;
+
 public class Play {
-    public static void main(String[] args) {
-        /*Person person = Person.create().firstName("Simon").noMiddleName().lastName("Bojesen").email("simon@schonberg.dk").phoneNumber("51197747");
-        System.out.println("Persons name is: " + person.firstName() + " " + person.lastName());
-        System.out.println("Persons email is: " + person.email());
-        System.out.println("Persons phone number is: " + person.phoneNumber());
+    public static void main(String[] args) throws IOException {
+        LearnEDMA2 learnEDMA2 = new LearnEDMA2(new RuntimeFactory("C:/tmp", new JavaCollectionFactory()));
+        MyDataModelFactory mdmf = learnEDMA2.getMyDataModelFactory();
+        MyDataModelInstance inst = null;
 
-        Person person1 = Person.fromTerminal(new SimpleTerminal());
-        System.out.println(person1);*/
+        if(mdmf.exists("MyInstance")){
+            System.out.println("Loading instance data...");
+            inst = mdmf.getInstance("MyInstance");
+        }
+        else
+        {
+            System.out.println("Creating instance data...");
+            inst = mdmf.newInstance("MyInstance");
+        }
 
-        /*WetsuitSizeList mylist = WetsuitSizeList.begin()
-                .add("XS")
-                .add("L")
-                .add("XL")
-                .end();
-        System.out.println(mylist);*/
-
-        Animal animal = Animal.fromTerminal(new SimpleTerminal());
-        System.out.println(animal);
-
+        inst.start();
+        MyDataModelTest test = new MyDataModelTest(inst.getAPI(), new SimpleTerminal());
+        test.start();
+        inst.stop();
     }
 }

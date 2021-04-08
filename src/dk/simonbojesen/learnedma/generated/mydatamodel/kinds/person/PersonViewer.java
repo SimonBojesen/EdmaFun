@@ -1,5 +1,6 @@
 package dk.simonbojesen.learnedma.generated.mydatamodel.kinds.person;
 
+import dk.simonbojesen.learnedma.generated.mydatamodel.kinds.course.CourseSet;
 import dk.simonbojesen.learnedma.generated.mydatamodel.kinds.teacher.TeacherViewer;
 import dk.simonbojesen.learnedma.generated.valuedomains.Email;
 import dk.simonbojesen.learnedma.generated.valuedomains.Name;
@@ -50,6 +51,12 @@ public interface PersonViewer
      *          is not extended to Teacher
      */
     public TeacherViewer asTeacher();
+
+    /**
+     * This methods follows the relation CourseEnrollment
+     * @return  The result of following the relation CourseEnrollment
+     */
+    public CourseSet asStudentGetCourseSet();
 
     /**
      * Returns <tt>true</tt> if this entity has the same ID as the provided

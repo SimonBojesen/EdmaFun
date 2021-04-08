@@ -1,6 +1,8 @@
 package dk.simonbojesen.learnedma.generated.edmaimpl.models.mydatamodel;
 
+import dk.simonbojesen.learnedma.generated.edmaimpl.models.mydatamodel.CourseSetImpl;
 import dk.simonbojesen.learnedma.generated.edmaimpl.models.mydatamodel.TeacherSetImpl;
+import dk.simonbojesen.learnedma.generated.mydatamodel.kinds.course.CourseSet;
 import dk.simonbojesen.learnedma.generated.mydatamodel.kinds.person.PersonFilter;
 import dk.simonbojesen.learnedma.generated.mydatamodel.kinds.person.PersonSet;
 import dk.simonbojesen.learnedma.generated.mydatamodel.kinds.person.PersonViewer;
@@ -339,6 +341,16 @@ public class PersonSetImpl implements PersonSet
     {
         int newSetID = edma_dmview.setSubOrderBy(setID, 2, true);
         return new PersonSetImpl(newSetID, edma_dmview);
+    }
+
+    /**
+     * This methods follows the relation CourseEnrollment
+     * @return  The result of following the relation CourseEnrollment
+     */
+    public CourseSet asStudentSetGetCourseSet()
+    {
+        int newSetID = edma_dmview.relationAsBSetGetASet(0, setID);
+        return new CourseSetImpl(newSetID, edma_dmview);
     }
 
     /**

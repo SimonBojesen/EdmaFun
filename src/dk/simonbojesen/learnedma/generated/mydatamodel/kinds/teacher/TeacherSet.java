@@ -1,5 +1,6 @@
 package dk.simonbojesen.learnedma.generated.mydatamodel.kinds.teacher;
 
+import dk.simonbojesen.learnedma.generated.mydatamodel.kinds.course.CourseSet;
 import dk.simonbojesen.learnedma.generated.mydatamodel.kinds.person.PersonSet;
 import dk.simonbojesen.learnedma.generated.mydatamodel.kinds.teacher.TeacherViewer;
 import dk.simonbojesen.learnedma.generated.valuedomains.mydatamodel.TeacherID;
@@ -142,6 +143,12 @@ public interface TeacherSet extends Iterable<TeacherViewer>
      *          schoolMail
      */
     public TeacherSet subOrderBySchoolMailDesc();
+
+    /**
+     * This methods follows the relation TeacherAssignment
+     * @return  The result of following the relation TeacherAssignment
+     */
+    public CourseSet asTeacherSetGetCourseSet();
 
     /**
      * Returns an iterator for this set

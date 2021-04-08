@@ -1,5 +1,6 @@
 package dk.simonbojesen.learnedma.generated.mydatamodel.kinds.teacher;
 
+import dk.simonbojesen.learnedma.generated.mydatamodel.kinds.course.CourseSet;
 import dk.simonbojesen.learnedma.generated.mydatamodel.kinds.person.PersonViewer;
 import dk.simonbojesen.learnedma.generated.valuedomains.Email;
 import dk.simonbojesen.learnedma.generated.valuedomains.mydatamodel.Teacher;
@@ -36,6 +37,12 @@ public interface TeacherViewer
      * @return  The Person view of this Teacher
      */
     public PersonViewer asPerson();
+
+    /**
+     * This methods follows the relation TeacherAssignment
+     * @return  The result of following the relation TeacherAssignment
+     */
+    public CourseSet getCourseSet();
 
     /**
      * Returns <tt>true</tt> if this entity has the same ID as the provided
